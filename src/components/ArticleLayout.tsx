@@ -1,29 +1,37 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { Container } from '@/components/Container';
+import { Prose } from '@/components/Prose';
+import { formatDate } from '@/lib/formatDate';
 
-import { Container } from '@/components/Container'
-import { Prose } from '@/components/Prose'
-import { formatDate } from '@/lib/formatDate'
+const ArrowLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+    <path
+      d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
 
-function ArrowLeftIcon(props) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
+interface ArticleLayoutProps {
+  children: React.ReactNode;
+  meta: {
+    title: string;
+    description: string;
+    date: string;
+  };
+  isRssFeed?: boolean;
+  previousPathname?: string;
 }
 
-export function ArticleLayout({
+// @ts-ignore
+const ArticleLayout: React.FC<ArticleLayoutProps> = ({
   children,
   meta,
   isRssFeed = false,
   previousPathname,
-}) {
+}) => {
   let router = useRouter()
 
   if (isRssFeed) {
@@ -70,3 +78,5 @@ export function ArticleLayout({
     </>
   )
 }
+
+export { ArticleLayout }

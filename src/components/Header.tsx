@@ -8,78 +8,68 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.jpg'
 
-function CloseIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
+interface LinkProps {
+  children: React.ReactNode
+  href: string
 }
 
-function ChevronDownIcon(props) {
-  return (
-    <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
-      <path
-        d="M1.75 1.75 4 4.25l2.25-2.5"
-        fill="none"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function SunIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
+const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+  <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+    <path
+      d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
+      fill="none"
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
-      <path
-        d="M12.25 3v1.5M21.5 12.25H20M18.791 18.791l-1.06-1.06M18.791 5.709l-1.06 1.06M12.25 20v1.5M4.5 12.25H3M6.77 6.77 5.709 5.709M6.77 17.73l-1.061 1.061"
-        fill="none"
-      />
-    </svg>
-  )
-}
+    />
+  </svg>
 
-function MoonIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
+const ChevronDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+  <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
+    <path
+      d="M1.75 1.75 4 4.25l2.25-2.5"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
 
-function MobileNavItem({ href, children }) {
-  return (
-    <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
-        {children}
-      </Popover.Button>
-    </li>
-  )
-}
+const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+  <svg
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
+    <path
+      d="M12.25 3v1.5M21.5 12.25H20M18.791 18.791l-1.06-1.06M18.791 5.709l-1.06 1.06M12.25 20v1.5M4.5 12.25H3M6.77 6.77 5.709 5.709M6.77 17.73l-1.061 1.061"
+      fill="none"
+    />
+  </svg>
 
-function MobileNavigation(props) {
+const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+  <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+    <path
+      d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+
+const MobileNavItem: React.FC<LinkProps> = ({ href, children }) =>
+  <li>
+    <Popover.Button as={Link} href={href} className="block py-2">
+      {children}
+    </Popover.Button>
+  </li>
+
+const MobileNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -135,7 +125,7 @@ function MobileNavigation(props) {
   )
 }
 
-function NavItem({ href, children }) {
+const NavItem: React.FC<LinkProps> = ({ href, children }) => {
   let isActive = useRouter().pathname === href
 
   return (
@@ -158,29 +148,26 @@ function NavItem({ href, children }) {
   )
 }
 
-function DesktopNavigation(props) {
-  return (
-    <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
-      </ul>
-    </nav>
-  )
-}
+const DesktopNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) =>
+  <nav {...props}>
+    <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+      <NavItem href="/about">About</NavItem>
+      <NavItem href="/articles">Articles</NavItem>
+      <NavItem href="/projects">Projects</NavItem>
+      <NavItem href="/speaking">Speaking</NavItem>
+      <NavItem href="/uses">Uses</NavItem>
+    </ul>
+  </nav>
 
-function ModeToggle() {
-  function disableTransitionsTemporarily() {
+const ModeToggle: React.FC = () => {
+  const disableTransitionsTemporarily = () => {
     document.documentElement.classList.add('[&_*]:!transition-none')
     window.setTimeout(() => {
       document.documentElement.classList.remove('[&_*]:!transition-none')
     }, 0)
   }
 
-  function toggleMode() {
+  const toggleMode = () => {
     disableTransitionsTemporarily()
 
     let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -207,13 +194,17 @@ function ModeToggle() {
   )
 }
 
-function clamp(number, a, b) {
-  let min = Math.min(a, b)
-  let max = Math.max(a, b)
-  return Math.min(Math.max(number, min), max)
+const clamp = (number: number, a: number, b: number) => {
+  let min = Math.min(a, b);
+  let max = Math.max(a, b);
+  return Math.min(Math.max(number, min), max);
 }
 
-function AvatarContainer({ className, ...props }) {
+interface AvatarContainerProps {
+  className?: string;
+}
+
+const AvatarContainer: React.FC<AvatarContainerProps & React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return (
     <div
       className={clsx(
@@ -222,32 +213,34 @@ function AvatarContainer({ className, ...props }) {
       )}
       {...props}
     />
-  )
+  );
+};
+
+interface AvatarProps {
+  large?: boolean;
+  className?: string;
 }
 
-function Avatar({ large = false, className, ...props }) {
-  return (
-    <Link
-      href="/"
-      aria-label="Home"
-      className={clsx(className, 'pointer-events-auto')}
-      {...props}
-    >
-      <Image
-        src={avatarImage}
-        alt=""
-        sizes={large ? '4rem' : '2.25rem'}
-        className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
-          large ? 'h-16 w-16' : 'h-9 w-9'
-        )}
-        priority
-      />
-    </Link>
-  )
-}
+const Avatar: React.FC<AvatarProps & React.HTMLAttributes<HTMLAnchorElement>> = ({ large = false, className, ...props }) =>
+  <Link
+    href="/"
+    aria-label="Home"
+    className={clsx(className, 'pointer-events-auto')}
+    {...props}
+  >
+    <Image
+      src={avatarImage}
+      alt=""
+      sizes={large ? '4rem' : '2.25rem'}
+      className={clsx(
+        'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+        large ? 'h-16 w-16' : 'h-9 w-9'
+      )}
+      priority
+    />
+  </Link>
 
-export function Header() {
+const Header: React.FC = () => {
   let isHomePage = useRouter().pathname === '/'
 
   let headerRef = useRef()
@@ -255,6 +248,7 @@ export function Header() {
   let isInitial = useRef(true)
 
   useEffect(() => {
+    // @ts-ignore
     let downDelay = avatarRef.current?.offsetTop ?? 0
     let upDelay = 64
 
@@ -267,6 +261,7 @@ export function Header() {
     }
 
     function updateHeaderStyles() {
+      // @ts-ignore
       let { top, height } = headerRef.current.getBoundingClientRect()
       let scrollY = clamp(
         window.scrollY,
@@ -345,6 +340,7 @@ export function Header() {
     window.addEventListener('resize', updateStyles)
 
     return () => {
+      // @ts-ignore
       window.removeEventListener('scroll', updateStyles, { passive: true })
       window.removeEventListener('resize', updateStyles)
     }
@@ -371,7 +367,10 @@ export function Header() {
             >
               <div
                 className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{ position: 'var(--header-inner-position)' }}
+                style={{
+                  // @ts-ignore
+                  position: 'var(--header-inner-position)'
+                }}
               >
                 <div className="relative">
                   <AvatarContainer
@@ -394,7 +393,10 @@ export function Header() {
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
-          style={{ position: 'var(--header-position)' }}
+          style={{
+            // @ts-ignore
+            position: 'var(--header-position)'
+          }}
         >
           <Container
             className="top-[var(--header-top,theme(spacing.6))] w-full"
@@ -425,3 +427,5 @@ export function Header() {
     </>
   )
 }
+
+export { Header }

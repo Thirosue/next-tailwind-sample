@@ -1,7 +1,13 @@
-import { useId } from 'react'
+import React from 'react';
+import { useId } from 'react';
 
-export function Section({ title, children }) {
-  let id = useId()
+interface Props {
+  title: string;
+  children: React.ReactNode;
+}
+
+const Section: React.FC<Props> = ({ title, children }) => {
+  let id = useId();
 
   return (
     <section
@@ -18,5 +24,7 @@ export function Section({ title, children }) {
         <div className="md:col-span-3">{children}</div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export { Section };
