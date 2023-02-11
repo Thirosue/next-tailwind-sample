@@ -13,7 +13,7 @@ interface LinkProps {
   href: string
 }
 
-const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+const CloseIcon = (props: React.SVGProps<SVGSVGElement>) =>
   <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
     <path
       d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
@@ -25,7 +25,7 @@ const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
     />
   </svg>
 
-const ChevronDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) =>
   <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
     <path
       d="M1.75 1.75 4 4.25l2.25-2.5"
@@ -36,7 +36,7 @@ const ChevronDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
     />
   </svg>
 
-const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+const SunIcon = (props: React.SVGProps<SVGSVGElement>) =>
   <svg
     viewBox="0 0 24 24"
     strokeWidth="1.5"
@@ -52,7 +52,7 @@ const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
     />
   </svg>
 
-const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+const MoonIcon = (props: React.SVGProps<SVGSVGElement>) =>
   <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
     <path
       d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
@@ -62,14 +62,14 @@ const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
     />
   </svg>
 
-const MobileNavItem: React.FC<LinkProps> = ({ href, children }) =>
+const MobileNavItem = ({ href, children }: LinkProps) =>
   <li>
     <Popover.Button as={Link} href={href} className="block py-2">
       {children}
     </Popover.Button>
   </li>
 
-const MobileNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
+const MobileNavigation = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -125,7 +125,7 @@ const MobileNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props)
   )
 }
 
-const NavItem: React.FC<LinkProps> = ({ href, children }) => {
+const NavItem = ({ href, children }: LinkProps) => {
   let isActive = useRouter().pathname === href
 
   return (
@@ -148,7 +148,7 @@ const NavItem: React.FC<LinkProps> = ({ href, children }) => {
   )
 }
 
-const DesktopNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) =>
+const DesktopNavigation = (props: React.HTMLAttributes<HTMLDivElement>) =>
   <nav {...props}>
     <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
       <NavItem href="/about">About</NavItem>
@@ -159,7 +159,7 @@ const DesktopNavigation: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props
     </ul>
   </nav>
 
-const ModeToggle: React.FC = () => {
+const ModeToggle = () => {
   const disableTransitionsTemporarily = () => {
     document.documentElement.classList.add('[&_*]:!transition-none')
     window.setTimeout(() => {
@@ -204,7 +204,7 @@ interface AvatarContainerProps {
   className?: string;
 }
 
-const AvatarContainer: React.FC<AvatarContainerProps & React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const AvatarContainer = ({ className, ...props }: AvatarContainerProps & React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       className={clsx(
@@ -221,7 +221,7 @@ interface AvatarProps {
   className?: string;
 }
 
-const Avatar: React.FC<AvatarProps & React.HTMLAttributes<HTMLAnchorElement>> = ({ large = false, className, ...props }) =>
+const Avatar = ({ large = false, className, ...props }: AvatarProps & React.HTMLAttributes<HTMLAnchorElement>) =>
   <Link
     href="/"
     aria-label="Home"
@@ -240,7 +240,7 @@ const Avatar: React.FC<AvatarProps & React.HTMLAttributes<HTMLAnchorElement>> = 
     />
   </Link>
 
-const Header: React.FC = () => {
+const Header = () => {
   let isHomePage = useRouter().pathname === '/'
 
   let headerRef = useRef()

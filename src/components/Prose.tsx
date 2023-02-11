@@ -5,6 +5,6 @@ interface Props {
   children: React.ReactNode
 }
 
-export const Prose: React.FC<Props> = ({ children, className }) =>
+export const Prose = ({ children, className }: Props) =>
   <div className={clsx(className, 'prose dark:prose-invert')}>{children}</div>
 

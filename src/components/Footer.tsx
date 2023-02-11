@@ -6,7 +6,7 @@ interface NavLinkProps {
   children: React.ReactNode;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+const NavLink = ({ href, children }: NavLinkProps) => {
   return (
     <Link
       href={href}
@@ -17,7 +17,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
   );
 };
 
-export const Footer: React.FC = () =>
+export const Footer = () =>
   <footer className="mt-32">
     <Container.Outer>
       <div className="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">

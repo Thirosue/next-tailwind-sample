@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 import { Card } from '@/components/Card'
@@ -5,7 +6,16 @@ import { SimpleLayout } from '@/components/SimpleLayout'
 import { formatDate } from '@/lib/formatDate'
 import { getAllArticles } from '@/lib/getAllArticles'
 
-function Article({ article }) {
+interface ArticleProps {
+  article: {
+    title: string
+    date: string
+    description: string
+    slug: string
+  }
+}
+
+const Article = ({ article }: ArticleProps) => {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -34,7 +44,7 @@ function Article({ article }) {
   )
 }
 
-export default function ArticlesIndex({ articles }) {
+const ArticlesIndex = ({ articles }: { articles: ArticleProps[] }) => {
   return (
     <>
       <Head>
@@ -51,7 +61,7 @@ export default function ArticlesIndex({ articles }) {
         <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
           <div className="flex max-w-3xl flex-col space-y-16">
             {articles.map((article) => (
-              <Article key={article.slug} article={article} />
+              <Article key={article.article.slug} article={article.article} />
             ))}
           </div>
         </div>
@@ -60,10 +70,14 @@ export default function ArticlesIndex({ articles }) {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetServerSideProps = async () => {
+  const articles = await getAllArticles()
+  const articlesMeta = articles.map(({ component, ...meta }) => meta)
   return {
     props: {
-      articles: (await getAllArticles()).map(({ component, ...meta }) => meta),
+      articles: articlesMeta.map((article) => ({ article })),
     },
   }
 }
+
+export default ArticlesIndex

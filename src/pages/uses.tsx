@@ -10,31 +10,29 @@ interface ToolProps {
   children: React.ReactNode;
 }
 
-const Tool: React.FC<ToolProps> = ({ title, href, children }) => {
+const Tool = ({ title, href, children }: ToolProps) => {
   return (
     <Card as="li">
-      {/* @ts-ignore */}
       <Card.Title as="h3" href={href}>
         {title}
-        {/* @ts-ignore */}
       </Card.Title>
-      {/* @ts-ignore */}
       <Card.Description>{children}</Card.Description>
     </Card>
   );
 };
 
 interface ToolsSectionProps {
+  title: string
   children: React.ReactNode;
 }
 
-const ToolsSection: React.FC<ToolsSectionProps & React.HTMLAttributes<HTMLDivElement>> = ({
+const ToolsSection = ({
+  title,
   children,
   ...props
-}) => {
+}: ToolsSectionProps & React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    // @ts-ignore
-    <Section {...props}>
+    <Section title={title} {...props}>
       <ul role="list" className="space-y-16">
         {children}
       </ul>
@@ -42,7 +40,7 @@ const ToolsSection: React.FC<ToolsSectionProps & React.HTMLAttributes<HTMLDivEle
   );
 };
 
-const Uses: React.FC = () =>
+const Uses = () =>
   <>
     <Head>
       <title>Uses - Spencer Sharp</title>

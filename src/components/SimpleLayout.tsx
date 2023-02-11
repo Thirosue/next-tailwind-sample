@@ -7,7 +7,7 @@ interface SimpleLayoutProps {
   children?: React.ReactNode;
 }
 
-export const SimpleLayout: React.FC<SimpleLayoutProps> = ({ title, intro, children }) => {
+export const SimpleLayout = ({ title, intro, children }: SimpleLayoutProps) => {
   return (
     <Container className="mt-16 sm:mt-32">
       <header className="max-w-2xl">

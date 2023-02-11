@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import { SimpleLayout } from '@/components/SimpleLayout'
 
-const ThankYou: React.FC = () =>
+const ThankYou = () =>
   <>
     <Head>
       <title>You’re subscribed - Spencer Sharp</title>

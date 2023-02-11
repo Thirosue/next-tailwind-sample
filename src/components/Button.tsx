@@ -10,16 +10,20 @@ const variantStyles: { [key: string]: string } = {
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit' | 'reset'
   className?: string;
   href?: string;
+  children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   variant = 'primary',
+  type,
   className,
   href,
+  children,
   ...props
-}) => {
+}: ButtonProps) => {
   className = clsx(
     'inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none',
     variantStyles[variant],
@@ -27,8 +31,12 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   return href ? (
-    <Link href={href} className={className} {...props} />
+    <Link href={href} className={className} {...props}>
+      {children}
+    </Link>
   ) : (
-    <button className={className} {...props} />
+    <button type={type} className={className} {...props}>
+      {children}
+    </button>
   );
 };

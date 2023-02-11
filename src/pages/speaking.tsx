@@ -1,18 +1,31 @@
-import Head from 'next/head'
-
+import Head from 'next/head';
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
 
-function SpeakingSection({ children, ...props }) {
-  return (
-    <Section {...props}>
-      <div className="space-y-16">{children}</div>
-    </Section>
-  )
+interface SpeakingSectionProps {
+  title: string
+  children: React.ReactNode;
+  [key: string]: any;
 }
 
-function Appearance({ title, description, event, cta, href }) {
+const SpeakingSection = ({ title, children, ...props }: SpeakingSectionProps) => {
+  return (
+    <Section title={title} {...props}>
+      <div className="space-y-16">{children}</div>
+    </Section>
+  );
+};
+
+interface AppearanceProps {
+  title: string;
+  description: string;
+  event: string;
+  cta: string;
+  href: string;
+}
+
+const Appearance = ({ title, description, event, cta, href }: AppearanceProps) => {
   return (
     <Card as="article">
       <Card.Title as="h3" href={href}>
@@ -22,10 +35,10 @@ function Appearance({ title, description, event, cta, href }) {
       <Card.Description>{description}</Card.Description>
       <Card.Cta>{cta}</Card.Cta>
     </Card>
-  )
-}
+  );
+};
 
-export default function Speaking() {
+const Speaking = () => {
   return (
     <>
       <Head>
@@ -84,3 +97,5 @@ export default function Speaking() {
     </>
   )
 }
+
+export default Speaking;

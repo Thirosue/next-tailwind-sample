@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 
-const ChevronRightIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const ChevronRightIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
       <path
@@ -15,12 +15,20 @@ const ChevronRightIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
 }
 
 interface CardProps {
-  as?: 'div' | 'span' | 'p' | 'li'
+  as?: 'div' | 'span' | 'p' | 'li' | 'article'
   className?: string
   children: React.ReactNode
 }
 
-const Card: React.FC<CardProps> = ({ as: Component = 'div', className, children }) => {
+interface CardOverrides {
+  Link: typeof CardLink;
+  Title: typeof CardTitle;
+  Description: typeof CardDescription;
+  Cta: typeof CardCta;
+  Eyebrow: typeof CardEyebrow;
+}
+
+const Card: React.FC<CardProps> & CardOverrides = ({ as: Component = 'div', className, children }) => {
   return (
     <Component
       className={clsx(className, 'group relative flex flex-col items-start')}
@@ -35,7 +43,7 @@ interface CardLinkProps {
   href: string
 }
 
-const CardLink: React.FC<CardLinkProps> = ({ children, ...props }) => {
+const CardLink = ({ children, ...props }: CardLinkProps) => {
   return (
     <>
       <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
@@ -47,7 +55,6 @@ const CardLink: React.FC<CardLinkProps> = ({ children, ...props }) => {
   )
 }
 
-// @ts-ignore
 Card.Link = CardLink
 
 interface CardTitleProps {
@@ -56,23 +63,21 @@ interface CardTitleProps {
   children: React.ReactNode
 }
 
-const CardTitle: React.FC<CardTitleProps> = ({ as: Component = 'h2', href, children }) => {
+const CardTitle = ({ as: Component = 'h2', href, children }: CardTitleProps) => {
   return (
     <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-      {/* @ts-ignore */}
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   )
 }
 
-// @ts-ignore
 Card.Title = CardTitle
 
 interface CardDescriptionProps {
   children: React.ReactNode
 }
 
-const CardDescription: React.FC<CardDescriptionProps> = ({ children }) => {
+const CardDescription = ({ children }: CardDescriptionProps) => {
   return (
     <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
       {children}
@@ -80,14 +85,13 @@ const CardDescription: React.FC<CardDescriptionProps> = ({ children }) => {
   )
 }
 
-// @ts-ignore
 Card.Description = CardDescription
 
 interface CardCtaProps {
   children: React.ReactNode
 }
 
-const CardCta: React.FC<CardCtaProps> = ({ children }) => {
+const CardCta = ({ children }: CardCtaProps) => {
   return (
     <div
       aria-hidden="true"
@@ -99,23 +103,24 @@ const CardCta: React.FC<CardCtaProps> = ({ children }) => {
   );
 };
 
-// @ts-ignore
 Card.Cta = CardCta
 
 interface CardEyebrowProps {
-  as?: 'div' | 'span' | 'p'
+  as?: 'div' | 'span' | 'p' | 'time'
   decorate?: boolean
   className?: string
-  children: React.ReactNode
+  dateTime?: string
+  children: React.ReactNode,
 }
 
-const CardEyebrow: React.FC<CardEyebrowProps> = ({
+const CardEyebrow = ({
   as: Component = 'p',
   decorate = false,
   className,
   children,
+  dateTime,
   ...props
-}) => {
+}: CardEyebrowProps) => {
   return (
     <Component
       className={clsx(
@@ -123,6 +128,7 @@ const CardEyebrow: React.FC<CardEyebrowProps> = ({
         'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
         decorate && 'pl-3.5'
       )}
+      {...(dateTime && { dateTime })}
       {...props}
     >
       {decorate && (
@@ -138,7 +144,6 @@ const CardEyebrow: React.FC<CardEyebrowProps> = ({
   )
 }
 
-// @ts-ignore
 Card.Eyebrow = CardEyebrow
 
 export { Card } 

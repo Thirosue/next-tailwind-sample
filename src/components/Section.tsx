@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Section: React.FC<Props> = ({ title, children }) => {
+const Section = ({ title, children }: Props) => {
   let id = useId();
 
   return (

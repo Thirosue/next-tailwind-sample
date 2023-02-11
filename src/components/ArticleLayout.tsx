@@ -4,7 +4,7 @@ import { Container } from '@/components/Container';
 import { Prose } from '@/components/Prose';
 import { formatDate } from '@/lib/formatDate';
 
-const ArrowLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
+const ArrowLeftIcon = (props: React.SVGProps<SVGSVGElement>) =>
   <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
     <path
       d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5"
@@ -25,13 +25,12 @@ interface ArticleLayoutProps {
   previousPathname?: string;
 }
 
-// @ts-ignore
-const ArticleLayout: React.FC<ArticleLayoutProps> = ({
+export const ArticleLayout = ({
   children,
   meta,
   isRssFeed = false,
   previousPathname,
-}) => {
+}: ArticleLayoutProps) => {
   let router = useRouter()
 
   if (isRssFeed) {
@@ -78,5 +77,3 @@ const ArticleLayout: React.FC<ArticleLayoutProps> = ({
     </>
   )
 }
-
-export { ArticleLayout }
